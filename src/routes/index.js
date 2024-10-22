@@ -1,9 +1,12 @@
 const fs = require("fs")
 const path = require("path")
 
-const authRoutes = require("./authRoutes")
+const artBidInteractionRoutes =require("./artBidInteractionRoutes")
 
-
+const artConnectDirectoryRoutes=require("./artConnectDirectoryRoutes")
+const artMarketRoutes=require("./artMarketRoutes")
+const notificationRoutes=require("./notificationRoutes")
+const projectParticipationRoutes=require("./projectParticipationRoutes")
 
 const loadAppRoutes = (app) => {
   const loadRoutes = (baseRoute, routesPath) => {
@@ -20,8 +23,11 @@ const loadAppRoutes = (app) => {
     })
   }
   // auth routes
-  loadRoutes("v1", authRoutes)
- 
+  loadRoutes("v1", artBidInteractionRoutes)
+  loadRoutes("v1", artConnectDirectoryRoutes)
+  loadRoutes("v1",artMarketRoutes)
+  loadRoutes("v1",notificationRoutes)
+  loadRoutes("v1",projectParticipationRoutes)
 
 }
 
