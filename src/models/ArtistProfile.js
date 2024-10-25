@@ -1,26 +1,27 @@
 const mongoose = require('mongoose');
 
 const artworkSchema = new mongoose.Schema({
-    title: { type: String, required: true },
+   title: { type: String, required: true },
+    description: { type: String, required: true },
     medium: { type: String, required: true },
     size: { type: String, required: true },
     price: { type: Number, required: true },
-    availability: { type: Boolean, default: true },
+    availability: { type: String, enum: ['available', 'sold', 'on hold'], default: 'available' },
     yearOfCreation: { type: Number, required: true },
     displayOption: {
         type: String,
         enum: ['Primary Market', 'Secondary Market', 'NFTs', 'Prints & Souvenirs'],
         required: true
     },
-    certificateOfAuthenticity: { type: String }, // URL or path to the certificate
+    artistId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+    certificates: [{ type: String }], // URLs or
     timestampRegistration: { type: String }, // URL or path to timestamp certificate
     saipRegistration: { type: String } // URL or path to SAIP registration certificate
 }, { timestamps: true });
 
 const artistProfileSchema = new mongoose.Schema({
-    fullName: {
-        arabic: { type: String, required: true },
-        english: { type: String, required: true }
+  firstName: {
+         type: String, 
     },
     username: {
         type: String,
@@ -70,4 +71,4 @@ const artistProfileSchema = new mongoose.Schema({
 
 const ArtistProfile = mongoose.model('ArtistProfile', artistProfileSchema);
 
-module.exports = {ArtistProfile};
+module.exports = {ArtistProfile, artworkSchema};

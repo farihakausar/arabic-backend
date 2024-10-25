@@ -7,7 +7,8 @@ const artConnectDirectoryRoutes=require("./artConnectDirectoryRoutes")
 const artMarketRoutes=require("./artMarketRoutes")
 const notificationRoutes=require("./notificationRoutes")
 const projectParticipationRoutes=require("./projectParticipationRoutes")
-
+const artWorkRoutes = require("./artWorkRoutes")
+const userRoutes = require("./userRoutes")
 const loadAppRoutes = (app) => {
   const loadRoutes = (baseRoute, routesPath) => {
     // Read files and sort them alphabetically
@@ -24,6 +25,8 @@ const loadAppRoutes = (app) => {
   }
   // auth routes
   loadRoutes("v1", artBidInteractionRoutes)
+  loadRoutes("v1",userRoutes)
+  loadRoutes("v1",artWorkRoutes)
   loadRoutes("v1", artConnectDirectoryRoutes)
   loadRoutes("v1",artMarketRoutes)
   loadRoutes("v1",notificationRoutes)
