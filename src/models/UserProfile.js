@@ -2,26 +2,32 @@ const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
     fullName: {
-        type: String, required: true },
+        type: String },
         
 
     username: {
         type: String,
-        required: true,
+       
         unique: true,
         trim: true
     },
+    deleted:{
+        type:Boolean
+    },
+    deletedAt:{
+        type:Date
+    },
     email: {
         type: String,
-        required: true,
-        unique: true,
+       
+unique: true,
         lowercase: true,
         trim: true,
         
     },
+    following: [{ type: mongoose.Schema.Types.ObjectId, ref: 'ArtistProfile' }], // Array of followed artist IDs
     mobileNumber: {
         type: String,
-        required: true,
         unique: true,
        
     },
@@ -36,8 +42,8 @@ const userSchema = new mongoose.Schema({
         }
     },
     location: {
-        city: { type: String, required: true },
-        country: { type: String, required: true }
+       
+        type: String
     },
     interests: {
         type: [String], // Array of selected categories
@@ -55,7 +61,7 @@ const userSchema = new mongoose.Schema({
     purchaseHistory: [{
         artworkId: { type: mongoose.Schema.Types.ObjectId, ref: 'Artwork' }, // Assuming you have an Artwork model
         purchaseDate: { type: Date, default: Date.now },
-        price: { type: Number, required: true }
+        price: { type: Number, }
     }]
 }, { timestamps: true });
 

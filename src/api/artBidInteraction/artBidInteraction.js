@@ -1,14 +1,14 @@
 const express = require("express")
 
-// const { login } = require("./controllers/login")
-// const { changePassword } = require("./controllers/changePassword")
-// const { fingerPrintLogin } = require("./controllers/fingerPrintLogin")
+const { getAllBids } = require("./controllers/getAllBids")
+const { getBidById } = require("./controllers/getBidById")
+const { createOpenCalls } = require("./controllers/createOpenCalls")
 
 const router = express.Router()
 
-// router.post("/login", login)
-// router.patch("/password/update", changePassword)
-// router.post("/login/fingerPrint", fingerPrintLogin)
+router.post("/create", createOpenCalls)
+router.get("/", getAllBids)
+router.get("/:bidId", getBidById)
 
 module.exports = router
 

@@ -1,58 +1,129 @@
 const mongoose = require('mongoose');
 
 const artworkSchema = new mongoose.Schema({
-   title: { type: String, required: true },
-    description: { type: String, required: true },
-    medium: { type: String, required: true },
-    size: { type: String, required: true },
-    price: { type: Number, required: true },
+   title: { type: String,},
+    description: { type: String,},
+    medium: { type: String,},
+    size: { type: String,},
+    price: { type: Number,},
     availability: { type: String, enum: ['available', 'sold', 'on hold'], default: 'available' },
-    yearOfCreation: { type: Number, required: true },
+    yearOfCreation: { type: Number,},
     displayOption: {
         type: String,
         enum: ['Primary Market', 'Secondary Market', 'NFTs', 'Prints & Souvenirs'],
         required: true
     },
-    artistId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
+    artistId: { type: mongoose.Schema.Types.ObjectId, ref: 'User',},
     certificates: [{ type: String }], // URLs or
     timestampRegistration: { type: String }, // URL or path to timestamp certificate
     saipRegistration: { type: String } // URL or path to SAIP registration certificate
 }, { timestamps: true });
 
 const artistProfileSchema = new mongoose.Schema({
-  firstName: {
+    fullName: {
          type: String, 
     },
+    isProfileComplete:{
+        type:Boolean
+    },
+    skills: [{ type: String }], // Array of skills
+    experience: [{
+        role: { type: String },
+        organization: { type: String },
+        startDate: { type: Date },
+        endDate: { type: Date },
+        description: { type: String }
+    }], // Array of experience objects
+    exhibitions: [{
+        title: { type: String },
+        year: { type: Number },
+        location: { type: String },
+        description: { type: String }
+    }], // Array of exhibitions objects
+    achievements: [{ type: String }], // Array of achievements
+    education: [{
+        degree: { type: String },
+        institution: { type: String },
+        year: { type: Number }
+    }], // Array of education objects
+    digitalTools: [{ type: String }], // Array of digital tools used
+    portfolioImages: [{ type: String }],
+    followersCount: {
+        type: Number,
+        default: 0, // Default to 0
+    },
+    profileViews: {
+        type: Number,
+        default: 0, // Default to 0
+    },
+    followers: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }], 
+    appreciationCount: {
+        type: Number,
+        default: 0, // Default to 0
+    },
+    services: {
+        name: { type: String },
+        serviceTime: { type: String },
+        delivery: { type: String }
+    }, // Service details
+
+    events: [{
+        images: [{ type: String }], // Array of image URLs
+        likes: { type: Number, default: 0 }, // Number of likes
+        views: { type: Number, default: 0 }, // Number of views
+        year: { type: Number }, // Year of the event
+        displayOption: {
+            type: String,
+            enum: ['Primary Market', 'Secondary Market', 'NFTs', 'Prints & Souvenirs'],
+            required: true
+        },
+    }] ,
     username: {
         type: String,
-        required: true,
-        unique: true,
+     
+   
         trim: true
     },
-    emailAddress: {
+    website:{
+        type:String
+    },
+    deleted:{
+        type:Boolean
+    },
+    deletedAt:{
+        type:Date
+    },
+    password:{
         type: String,
-        required: true,
-        unique: true,
-        match: /.+\@.+\..+/ // Basic email validation
+    },
+    email: {
+        type: String,
+     
+    
     },
     mobileNumber: {
         type: String,
-        required: true,
-        unique: true,
-        match: /^\+?[0-9]{10,15}$/ // Adjust regex based on the mobile format you need
+     
+        
     },
+ 
     profilePicture: {
-        type: String, // URL or path to the image
-        required: true
+        type: String, 
+       
+    },
+    
+    servicePicture: {
+        type: String, 
+       
     },
     biography: {
-        arabic: { type: String, required: true },
-        english: { type: String, required: true }
+        type: String
     },
     location: {
-        city: { type: String, required: true },
-        country: { type: String, required: true }
+     
+        type: String
     },
+
     socialMediaLinks: {
         instagram: { type: String },
         behance: { type: String },
@@ -60,7 +131,7 @@ const artistProfileSchema = new mongoose.Schema({
     },
     nationalIDNumber: {
         type: String,
-        required: true,
+     
         unique: true,
         // Consider adding a regex for ID format validation if necessary
     },

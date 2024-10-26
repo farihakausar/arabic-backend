@@ -4,7 +4,8 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const speakeasy = require('speakeasy');
 const nodemailer = require('nodemailer');
-
+const {User} = require('../../../models/UserProfile');
+const {ArtistProfile} = require('../../../models/ArtistProfile'); 
 
 const verifyOTP = async (req, res) => {
     const { userId } = req.params;
