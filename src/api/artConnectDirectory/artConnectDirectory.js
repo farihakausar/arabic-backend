@@ -1,18 +1,17 @@
-const express = require("express")
+const express = require("express");
 
+const { createArtist } = require("./controllers/createArtist");
+const { getAllArtists } = require("./controllers/getAllArtists");
+const { getArtistById } = require("./controllers/getArtistById");
+const { profileViewCount } = require("./controllers/profileViewCount");
+const { appreciationCount } = require("./controllers/appreciationCount");
 
-const {createArtist}=require("./controllers/createArtist")
-const {getAllArtists}=require("./controllers/getAllArtists")
-const {getArtistById}=require("./controllers/getArtistById")
+const router = express.Router();
+router.post("/createArtist/:artistId", createArtist);
 
+router.get("/:artistId", getArtistById);
 
-const router = express.Router()
-router.post('/createArtist/:artistId',createArtist);
-
-router.get('/:artistId', getArtistById);
-
-router.get('/', getAllArtists);
-
-
-module.exports = router
-
+router.get("/", getAllArtists);
+router.get("/profileCount/:artistId", profileViewCount);
+router.get("/appreciation/:artistId", appreciationCount);
+module.exports = router;

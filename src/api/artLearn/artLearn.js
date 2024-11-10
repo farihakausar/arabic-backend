@@ -1,11 +1,23 @@
-const express = require("express")
+const express = require("express");
+const { createWorkshops } = require("./controllers/createWorkshops");
+const { getAllLearn } = require("./controllers/getAllLearn");
+const { getWorkShopById } = require("./controllers/getWorkShopById");
+const { getHighRated } = require("./controllers/getHighRated");
+const { getMostAttended } = require("./controllers/getMostAttended");
+const { getNewWorkshop } = require("./controllers/getNewWorkshop");
+const { getTopInstructors } = require("./controllers/getTopInstructors");
+const { registerUser } = require("./controllers/registerUser");
+const { getTopWorkShops } = require("./controllers/getTopWorkShops");
 
+const router = express.Router();
 
-
-
-const router = express.Router()
-
-
-
-module.exports = router
-
+router.post("/create", createWorkshops);
+router.get("/", getAllLearn);
+router.get("/:workshopId", getWorkShopById);
+router.get("highRated", getHighRated);
+router.get("/atteneded", getMostAttended);
+router.get("/latest", getNewWorkshop);
+router.get("/topInstructor", getTopInstructors);
+router.get("/TopWorkShops", getTopWorkShops);
+router.post("/register", registerUser);
+module.exports = router;

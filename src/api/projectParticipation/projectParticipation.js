@@ -1,19 +1,15 @@
-const express = require('express');
+const express = require("express");
 
-const {createProject}=require("./controllers/createProject")
-const {viewProjects}=require("./controllers/viewProjects")
-const {submitBid}=require("./controllers/submitBid")
-const {manageBids}=require("./controllers/manageBids")
+const { createProject } = require("./controllers/createProject");
+const { viewProjects } = require("./controllers/viewProjects");
 
-const {projectHistory}=require("./controllers/projectHistory")
-const authMiddleware = require('../../middleware/authMiddleware');
+const { projectBidsStatus } = require("./controllers/projectBidsStatus");
 
 const router = express.Router();
 
-router.post('/create', authMiddleware, createProject);
-router.get('/view', viewProjects);
-router.post('/bids', authMiddleware,submitBid);
-router.put('/bids/:projectId/:bidId/:action', authMiddleware, manageBids);
-router.get('/projects/:projectId/history',projectHistory);
+router.post("/create/:userId", createProject);
+router.get("/view/:userId", viewProjects);
+
+router.post("/:bidId", projectBidsStatus);
 
 module.exports = router;
