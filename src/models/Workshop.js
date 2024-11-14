@@ -11,13 +11,13 @@ const workshopSchema = new mongoose.Schema(
       ref: "ArtistProfile",
       required: true,
     },
-
+    attendees: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }], 
     duration: { type: String, required: true }, // Duration of the workshop (e.g., "2 hours")
     icon: { type: String }, // URL or path to an icon representing the workshop
     type: {
       type: String,
     },
-    topWorkshops: [{ type: mongoose.Schema.Types.ObjectId, ref: "Workshop" }], // Array of top workshops (reference to other workshop documents)
+  
     ratings: {
       average: { type: Number, default: 0 }, // Average rating
       count: { type: Number, default: 0 }, // Number of ratings

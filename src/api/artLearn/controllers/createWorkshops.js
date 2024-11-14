@@ -1,6 +1,6 @@
 const { Workshop } = require("../../../models/Workshop"); // Adjust the path as necessary
 
-// Create a new workshop
+
 const createWorkshops = async (req, res) => {
   const { category, date, name, location, instructor, duration, icon, type } =
     req.body;

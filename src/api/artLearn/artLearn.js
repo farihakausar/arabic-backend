@@ -14,10 +14,15 @@ const router = express.Router();
 router.post("/create", createWorkshops);
 router.get("/", getAllLearn);
 router.get("/:workshopId", getWorkShopById);
+router.post("/register/:userId/:workshopId", registerUser);
+
+
+
 router.get("highRated", getHighRated);
 router.get("/atteneded", getMostAttended);
 router.get("/latest", getNewWorkshop);
 router.get("/topInstructor", getTopInstructors);
 router.get("/TopWorkShops", getTopWorkShops);
-router.post("/register", registerUser);
+
+
 module.exports = router;

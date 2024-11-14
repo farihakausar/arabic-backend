@@ -31,6 +31,8 @@ unique: true,
         unique: true,
        
     },
+    favProjects: [{ type: mongoose.Schema.Types.ObjectId, ref: 'ProjectModel' }] ,
+     favArtMarket: [{ type: mongoose.Schema.Types.ObjectId, ref: 'ArtMarket' }] ,
     profilePicture: {
         type: String, // You might store a URL or a file path
         required: false,
@@ -50,6 +52,7 @@ unique: true,
         enum: ['Painting', 'Sculpture', 'Digital Art', 'Photography'], // Example categories
         required: false
     },
+    attendedWorkshops: [{ type: mongoose.Schema.Types.ObjectId, ref: "Workshop" }] ,
     wishlist: {
         type: [String], // Array of saved artworks, projects, or artists
         required: false

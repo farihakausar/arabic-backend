@@ -1,6 +1,6 @@
 
 
-const { Workshop } = require('../../../models/Workshop'); // Adjust the path as necessary
+const { Workshop } = require('../../../models/Workshop'); 
 const getHighRated = async (req, res) => {
     try {
         const highRatedWorkshops = await Workshop.find({ type: 'High Rated' });

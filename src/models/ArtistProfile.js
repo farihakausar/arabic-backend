@@ -1,35 +1,5 @@
 const mongoose = require("mongoose");
 
-const artworkSchema = new mongoose.Schema(
-  {
-    title: { type: String },
-    description: { type: String },
-    medium: { type: String },
-    size: { type: String },
-    price: { type: Number },
-    availability: {
-      type: String,
-      enum: ["available", "sold", "on hold"],
-      default: "available",
-    },
-    yearOfCreation: { type: Number },
-    displayOption: {
-      type: String,
-      enum: [
-        "Primary Market",
-        "Secondary Market",
-        "NFTs",
-        "Prints & Souvenirs",
-      ],
-      required: true,
-    },
-    artistId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-    certificates: [{ type: String }], // URLs or
-    timestampRegistration: { type: String }, // URL or path to timestamp certificate
-    saipRegistration: { type: String }, // URL or path to SAIP registration certificate
-  },
-  { timestamps: true }
-);
 
 const artistProfileSchema = new mongoose.Schema(
   {
@@ -150,7 +120,7 @@ const artistProfileSchema = new mongoose.Schema(
 
       unique: true,
     },
-    gallery: [artworkSchema], // Array of artworks in the portfolio
+    gallery: [{ type: mongoose.Schema.Types.ObjectId, ref: "Artwork" }],
   },
   {
     timestamps: true, // Automatically manage createdAt and updatedAt fields
@@ -159,4 +129,4 @@ const artistProfileSchema = new mongoose.Schema(
 
 const ArtistProfile = mongoose.model("ArtistProfile", artistProfileSchema);
 
-module.exports = { ArtistProfile, artworkSchema };
+module.exports = { ArtistProfile };
