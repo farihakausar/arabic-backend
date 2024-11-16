@@ -23,12 +23,12 @@ const ArtMarketSchema = new mongoose.Schema({
   },
   artist: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Artist", // reference to an artist document
+    ref: "ArtistProfile", // reference to an artist document
     required: true,
   },
   artwork: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Artwork", // reference to an artwork document
+    ref: "artwork", // reference to an artwork document
     required: true,
   },
 });

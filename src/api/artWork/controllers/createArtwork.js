@@ -1,5 +1,8 @@
 const { ArtistProfile } = require('../../../models/ArtistProfile');
 const { Artwork } = require('../../../models/Artwork'); // Import the Artwork model
+const { ArtMarketSchemaModel } = require('../../../models/ArtMarket'); // Import the ArtMarket model
+const { Notification } = require('../../../models/Notification'); // Import the Notification model
+const { NotificationSettings } = require('../../../models/NotificationSettings'); // Import the NotificationSettings model
 const mongoose = require("mongoose");
 
 const createArtwork = async (req, res) => {
@@ -37,10 +40,45 @@ const createArtwork = async (req, res) => {
     // Save the updated artist profile
     await artistProfile.save();
 
-    // Return the created artwork in the response
+    // Create a new ArtMarket entry for this artwork
+    const newArtMarketEntry = new ArtMarketSchemaModel({
+      image: req.body.image, // Use the image URL from the request body
+      artist: artistId,  // Link the artist to the art market
+      artwork: newArtwork._id,  // Link the artwork to the art market
+    });
+
+    // Save the ArtMarket entry
+    await newArtMarketEntry.save();
+
+    // **Notification Logic**
+    // Fetch users who have subscribed to artwork notifications
+    const usersToNotify = await NotificationSettings.find({
+      notify_new_artwork: true,
+    }).populate("user");
+
+    // Send notification to each user
+    usersToNotify.forEach(async (setting) => {
+      const user = setting.user;
+
+      // Create a notification for each user
+      const notification = new Notification({
+        user: user._id,
+        event_type: "new_artwork",
+        message: `A new artwork titled "${newArtwork.title}" has been added by artist "${artistProfile.name}".`,
+      });
+
+      await notification.save();
+
+      // Optionally, send a push notification/email, etc.
+      sendPushNotification(user, notification.message); // Implement your push notification service
+      sendEmailNotification(user.email, notification.message); // Implement your email service
+    });
+
+    // Return the created artwork and the ArtMarket entry in the response
     res.status(201).json({
-      message: "Artwork created successfully",
-      artwork: newArtwork
+      message: "Artwork and ArtMarket entry created successfully",
+      artwork: newArtwork,
+      artMarket: newArtMarketEntry,
     });
   } catch (error) {
     console.error(error);

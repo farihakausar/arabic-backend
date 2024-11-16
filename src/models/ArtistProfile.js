@@ -3,6 +3,13 @@ const mongoose = require("mongoose");
 
 const artistProfileSchema = new mongoose.Schema(
   {
+    representationDetails: {
+      agencyName: { type: String },
+      agencyContact: { type: String },
+      contractStartDate: { type: Date },
+      contractEndDate: { type: Date },
+      terms: { type: String },
+    },
     fullName: {
       type: String,
     },

@@ -1,6 +1,8 @@
 const { OpenCalls } = require("../../../models/OpenCalls");
 const { ProjectModel } = require("../../../models/ProjectModel");
 const { PatronProfile } = require("../../../models/PatronProfile");
+const { Notification } = require("../../../models/Notification");  // Assuming you have a Notification model
+const { NotificationSettings } = require("../../../models/NotificationSettings"); // Assuming you have a NotificationSettings model
 
 // Create open call API with patron role validation
 const createOpenCalls = async (req, res) => {
@@ -66,6 +68,31 @@ const createOpenCalls = async (req, res) => {
       },
       { new: true } // Returns the updated project
     );
+
+    // **Notification Logic**
+    // Fetch users who have subscribed to open call notifications
+    const usersToNotify = await NotificationSettings.find({
+      notify_project_open_call: true,
+    }).populate("user");
+
+    // Send notification to each user
+    usersToNotify.forEach(async (setting) => {
+      const user = setting.user;
+
+      // Create a notification for each user
+      const notification = new Notification({
+        user: user._id,
+        event_type: "new_open_call",
+        message: `A new open call has been created for the project "${name}".`,
+      });
+
+      await notification.save();
+
+      // Optionally, send a push notification/email, etc.
+      // For push notifications, you can use a service like FCM or APNS.
+      sendPushNotification(user, notification.message); // Implement your push notification service
+      sendEmailNotification(user.email, notification.message); // Implement your email service
+    });
 
     // Return the created open call
     return res.status(201).json(newOpenCall);

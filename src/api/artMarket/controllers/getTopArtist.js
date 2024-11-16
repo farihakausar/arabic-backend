@@ -1,5 +1,4 @@
-const { ArtMarketSchemaModel } = require("../models/ArtMarket");
-const { Artist } = require("../models/Artist"); // Assuming there's an Artist model.
+const { ArtMarketSchemaModel } = require("../../../models/ArtMarket");
 
 const getTopArtist = async (req, res) => {
   try {

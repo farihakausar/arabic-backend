@@ -1,4 +1,4 @@
-const { ArtMarketSchemaModel } = require("../models/ArtMarket");
+const { ArtMarketSchemaModel } = require("../../../models/ArtMarket");
 
 const getMarketById = async (req, res) => {
   const { id } = req.params;

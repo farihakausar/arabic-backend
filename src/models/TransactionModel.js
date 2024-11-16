@@ -5,7 +5,15 @@ const transactionSchema = new mongoose.Schema({
     buyerId: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
     salePrice: { type: Number, required: true },
     saleDate: { type: Date, default: Date.now },
+    
     paymentInfo: { type: String, required: true }, // Details about the payment
+
+
+    patronId: { type: mongoose.Schema.Types.ObjectId, ref: 'Patron' },
+    transactionId: { type: String, required: true },
+ 
+    description: { type: String },
+    status: { type: String, enum: ['Completed', 'Pending', 'Failed'], default: 'Pending' }
 }, { timestamps: true });
 
 

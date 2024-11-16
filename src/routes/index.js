@@ -12,6 +12,9 @@ const artWorkRoutes = require("./artWorkRoutes");
 const userRoutes = require("./userRoutes");
 const artLearnRoutes = require("./artLearnRoutes");
 const generalUserRoutes = require("./generalUserRoutes");
+const walletRoutes = require("./walletRoutes");
+const intermediayRoutes = require("./intermediayRoutes");
+const patronRoutes = require("./patronRoutes");
 const loadAppRoutes = (app) => {
   const loadRoutes = (baseRoute, routesPath) => {
     // Read files and sort them alphabetically
@@ -30,13 +33,15 @@ const loadAppRoutes = (app) => {
   loadRoutes("v1", artBidInteractionRoutes);
   loadRoutes("v1", userRoutes);
   loadRoutes("v1", artWorkRoutes);
+  loadRoutes("v1",patronRoutes)
   loadRoutes("v1", artConnectDirectoryRoutes);
+  loadRoutes("v1",intermediayRoutes)
   loadRoutes("v1", artMarketRoutes);
   loadRoutes("v1", notificationRoutes);
   loadRoutes("v1", artLearnRoutes);
   loadRoutes("v1", projectParticipationRoutes);
   loadRoutes("v1",generalUserRoutes)
-
+loadRoutes("v1",walletRoutes)
 };
 
 module.exports = {

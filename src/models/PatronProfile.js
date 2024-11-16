@@ -6,29 +6,31 @@ const patronProfileSchema = new mongoose.Schema(
       arabic: { type: String },
       english: { type: String },
     },
+    artists: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "ArtistProfile", // Reference to the Artist model
+      },
+    ],
     emailAddress: {
       type: String,
 
-      unique: true,
-      match: /.+\@.+\..+/, // Basic email validation
     },
     mobileNumber: {
       type: String,
 
-      unique: true,
-      match: /^\+?[0-9]{10,15}$/, // Adjust regex based on the mobile format you need
     },
     fullName: { type: String },
     idNumber: { type: String },
     mobileNumber: {
       type: String,
 
-      match: /^\+?[0-9]{10,15}$/, // Adjust regex based on the mobile format you need
+     
     },
     emailAddress: {
       type: String,
 
-      match: /.+\@.+\..+/, // Basic email validation
+   
     },
     nationalAddress: { type: String },
     authorizationDocument: { type: String }, // URL or path to the uploaded document// Embedded document for representative details
