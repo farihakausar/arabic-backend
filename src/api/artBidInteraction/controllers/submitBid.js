@@ -21,7 +21,7 @@ const submitBid = async (req, res) => {
       timeline,
       pricing,
       bidder: userId, // Assuming the artist's user ID is stored in req.userId after authentication
-      project: projectId, // Associate the bid with the correct project ID
+      projectId: projectId, // Associate the bid with the correct project ID
     });
 
     // Save the bid to the database

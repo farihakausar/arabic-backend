@@ -4,7 +4,7 @@ const userSchema = new mongoose.Schema({
     fullName: {
         type: String },
         
-
+        stripeCustomerId: String,
     username: {
         type: String,
        
@@ -63,6 +63,11 @@ unique: true,
     },
     purchaseHistory: [{
         artworkId: { type: mongoose.Schema.Types.ObjectId, ref: 'Artwork' }, // Assuming you have an Artwork model
+        purchaseDate: { type: Date, default: Date.now },
+        price: { type: Number, }
+    }],
+    purchaseHistoryMarket: [{
+        artworkId: { type: mongoose.Schema.Types.ObjectId, ref: 'ArtMarket' }, // Assuming you have an Artwork model
         purchaseDate: { type: Date, default: Date.now },
         price: { type: Number, }
     }]

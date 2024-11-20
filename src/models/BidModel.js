@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 // Define the schema for bids
 const bidSchema = new Schema({
-  project: {
+  projectId: {
     type: Schema.Types.ObjectId,
     ref: "Project",
     required: true,
